@@ -3,37 +3,39 @@ package com.maria.controle_gastos_backend.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Despesas")
+@Table(name = "despesa")
 public class Despesa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Long id;
 
     private String descricao;
-    private double valor;
+    private BigDecimal valor;
     private LocalDate data;
 
     public Despesa(){
 
     }
-    public Despesa(Integer id, String descricao, double valor, LocalDate data) {
-        Id = id;
+
+    public Despesa(Long id, String descricao, BigDecimal valor, LocalDate data) {
+        id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.data = data;
     }
 
-    public int getId() {
-        return Id;
+    public Long getId() {
+        return id;
     }
 
-    public void setId(Integer id) {
-        Id = id;
+    public void setId(Long id) {
+        id = id;
     }
 
     public String getDescricao() {
@@ -44,11 +46,11 @@ public class Despesa implements Serializable {
         this.descricao = descricao;
     }
 
-    public double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
@@ -64,11 +66,11 @@ public class Despesa implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Despesa despesa = (Despesa) o;
-        return Objects.equals(Id, despesa.Id);
+        return Objects.equals(id, despesa.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(Id);
+        return Objects.hashCode(id);
     }
 }
