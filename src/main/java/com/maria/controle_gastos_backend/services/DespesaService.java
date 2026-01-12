@@ -19,10 +19,10 @@ public class DespesaService {
      }
 
      public Despesa findById(Long id){
-        Optional<Despesa> obj = respository.findById(id);
-        return obj.get();
+//        Optional<Despesa> obj = respository.findById(id);
+//        return obj.get();
 
-         //return respository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Despesa não encontrada"));
+         return respository.findById(id).orElseThrow(()-> new ResourceNotFoundException(id));
 
      }
 
