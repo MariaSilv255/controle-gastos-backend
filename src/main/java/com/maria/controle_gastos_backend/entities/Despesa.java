@@ -13,7 +13,7 @@ public class Despesa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String descricao;
     private BigDecimal valor;
@@ -23,19 +23,19 @@ public class Despesa implements Serializable {
 
     }
 
-    public Despesa(Long id, String descricao, BigDecimal valor, LocalDate data) {
-        id = id;
+    public Despesa(Integer id, String descricao, BigDecimal valor, LocalDate data) {
+        this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.data = data;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        id = id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDescricao() {

@@ -35,8 +35,9 @@ public class DespesaResource {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable long id){service.delete(id);
-       return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> delete(@PathVariable long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
@@ -45,6 +46,12 @@ public class DespesaResource {
          return ResponseEntity.ok().body(despesa);
 
     }
+    @GetMapping("/periodo")
+    public ResponseEntity<List<Despesa>> findByPeriodo(@RequestParam LocalDate dataInicio,@RequestParam LocalDate dataFim){
 
+        List<Despesa> despesa = service.findByPeriodo(dataInicio,dataFim);
+        return ResponseEntity.ok().body(despesa);
+
+    }
 
 }
