@@ -5,7 +5,6 @@ import com.maria.controle_gastos_backend.exceptions.ResourceNotFoundException;
 import com.maria.controle_gastos_backend.repositories.DespesaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

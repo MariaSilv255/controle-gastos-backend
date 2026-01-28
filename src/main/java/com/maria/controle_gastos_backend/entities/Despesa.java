@@ -19,19 +19,33 @@ public class Despesa implements Serializable {
     private LocalDate data;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
+    @JoinColumn(name = "categoria.id")
     private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario.id")
+    private Usuario usuario;
 
     public Despesa(){
 
     }
 
-    public Despesa(Long id, String descricao, BigDecimal valor, LocalDate data, Categoria categoria) {
+
+    public Despesa(Long id, String descricao, BigDecimal valor, LocalDate data, Categoria categoria, Usuario usuario) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.data = data;
         this.categoria = categoria;
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Categoria getCategoria() {

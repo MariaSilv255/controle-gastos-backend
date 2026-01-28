@@ -22,7 +22,8 @@ public class CategoriaService {
 
     public Categoria findById(Long id){
         Optional<Categoria> categoria = repository.findById(id);
-        return categoria.get();
+        //return categoria.get();
+        return categoria.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Categoria save(Categoria categoria){
