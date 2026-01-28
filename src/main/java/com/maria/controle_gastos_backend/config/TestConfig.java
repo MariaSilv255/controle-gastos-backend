@@ -1,6 +1,8 @@
 package com.maria.controle_gastos_backend.config;
 
+import com.maria.controle_gastos_backend.entities.Categoria;
 import com.maria.controle_gastos_backend.entities.Despesa;
+import com.maria.controle_gastos_backend.repositories.CategoriaRepository;
 import com.maria.controle_gastos_backend.repositories.DespesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,11 +20,23 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private DespesaRepository despesaRepository;
 
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        Despesa despesa1 = new Despesa(null,"compra de comida",new BigDecimal(12.0), LocalDate.now());
-        Despesa despesa2 = new Despesa(null,"compra remedio",new BigDecimal(122.0), LocalDate.now());
+
+
+        Categoria categoriaa = new Categoria(null,"Alimentação");
+        Categoria categoriab = new Categoria(null,"Moradia");
+
+        categoriaRepository.saveAll(Arrays.asList(categoriaa,categoriab));
+
+        Despesa despesa1 = new Despesa(null,"compra de comida",new BigDecimal(12.0), LocalDate.now(),categoriaa);
+        Despesa despesa2 = new Despesa(null,"compra remedio",new BigDecimal(122.0), LocalDate.now(),categoriab);
+
+
         despesaRepository.saveAll(Arrays.asList(despesa1,despesa2));
+
     }
 }

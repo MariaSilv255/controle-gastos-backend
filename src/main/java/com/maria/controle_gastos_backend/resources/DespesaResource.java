@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/gastos")
+@RequestMapping(value = "/gasto")
 public class DespesaResource {
 
     @Autowired

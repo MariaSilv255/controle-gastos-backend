@@ -8,33 +8,45 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "despesa")
 public class Despesa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String descricao;
     private BigDecimal valor;
     private LocalDate data;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
     public Despesa(){
 
     }
 
-    public Despesa(Integer id, String descricao, BigDecimal valor, LocalDate data) {
+    public Despesa(Long id, String descricao, BigDecimal valor, LocalDate data, Categoria categoria) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.data = data;
+        this.categoria = categoria;
     }
 
-    public Integer getId() {
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
