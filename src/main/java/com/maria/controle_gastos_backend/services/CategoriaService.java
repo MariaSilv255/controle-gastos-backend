@@ -23,7 +23,11 @@ public class CategoriaService {
     public Categoria findById(Long id){
         Optional<Categoria> categoria = repository.findById(id);
         //return categoria.get();
-        return categoria.orElseThrow(() -> new ResourceNotFoundException(id));
+        return categoria.orElseThrow(() -> new ResourceNotFoundException("Resource not found id" + id));
+    }
+
+    public Categoria findByCategoria (String categoria){
+        return repository.findByCategoria(categoria).orElseThrow(() -> new ResourceNotFoundException("Resource not found categoria: "+ categoria));
     }
 
     public Categoria save(Categoria categoria){
@@ -32,7 +36,7 @@ public class CategoriaService {
 
     public void delete(Long id){
         if(!repository.existsById(id)){
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Resource not found id" + id);
         }else{
             repository.deleteById(id);
         }
@@ -45,7 +49,7 @@ public class CategoriaService {
         updateData(entidade,categoria);
         return repository.save(entidade);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Resource not found id" + id);
         }
 
 

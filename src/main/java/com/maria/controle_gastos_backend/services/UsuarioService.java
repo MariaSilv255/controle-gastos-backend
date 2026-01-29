@@ -24,8 +24,13 @@ public class UsuarioService {
 
     public Usuario findById(Long id) {
         Optional<Usuario> usuario = repository.findById(id);
-        return usuario.orElseThrow(() ->new ResourceNotFoundException(id));
+        return usuario.orElseThrow(() ->new ResourceNotFoundException("Resource not found id" + id));
     }
+
+    public Usuario findByTelefone(String telefone){
+        return repository.findBytelefone(telefone).orElseThrow(() -> new ResourceNotFoundException("Resource not found telefone" + telefone));
+    }
+
 
     public Usuario save(Usuario usuario) {
         return repository.save(usuario);
@@ -33,7 +38,7 @@ public class UsuarioService {
 
     public void delete(Long id) {
         if (!repository.existsById(id)) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Resource not found id" + id);
         } else {
             repository.deleteById(id);
         }
@@ -46,7 +51,7 @@ public class UsuarioService {
             updateData(entidade, usuario);
             return repository.save(entidade);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Resource not found id" + id);
         }
 
 

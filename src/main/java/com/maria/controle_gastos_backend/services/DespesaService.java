@@ -25,7 +25,7 @@ public class DespesaService {
        Optional<Despesa> obj = respository.findById(id);
 //        return obj.get();
 
-         return obj.orElseThrow(()-> new ResourceNotFoundException(id));
+         return obj.orElseThrow(()-> new ResourceNotFoundException("Resource not found id" + id));
 
      }
 
@@ -36,7 +36,7 @@ public class DespesaService {
 
      public void delete (long id){
       if(!respository.existsById(id)){
-          throw new ResourceNotFoundException(id);
+          throw new ResourceNotFoundException("Resource not found id" + id);
       }else{
           respository.deleteById(id);
       }
@@ -49,7 +49,7 @@ public class DespesaService {
              updateData(entidade,despesa);
              return respository.save(entidade);
          }catch (EntityNotFoundException e){
-             throw new ResourceNotFoundException(id);
+             throw new ResourceNotFoundException("Resource not found id" + id);
          }
      }
 

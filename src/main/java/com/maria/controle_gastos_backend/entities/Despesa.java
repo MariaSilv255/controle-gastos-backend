@@ -19,11 +19,11 @@ public class Despesa implements Serializable {
     private LocalDate data;
 
     @ManyToOne
-    @JoinColumn(name = "categoria.id")
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     @ManyToOne
-    @JoinColumn(name = "usuario.id")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     public Despesa(){

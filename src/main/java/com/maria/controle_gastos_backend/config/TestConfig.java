@@ -37,8 +37,8 @@ public class TestConfig implements CommandLineRunner {
 
         categoriaRepository.saveAll(Arrays.asList(categoriaa,categoriab));
 
-        Usuario user2 = new Usuario(null,"maira aparecida","84987518025","123456","maria@gmail");
-        Usuario user1 = new Usuario(null,"maira","84987518025","123456","maria@gmail");
+        Usuario user2 = new Usuario(null,"maria aparecida","84987518025","123456","maria@gmail");
+        Usuario user1 = new Usuario(null,"maira","111111111","123456","maria@gmail");
 
         usuarioRepository.saveAll(Arrays.asList(user1,user2));
 
