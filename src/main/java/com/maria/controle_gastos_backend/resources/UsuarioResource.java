@@ -1,5 +1,6 @@
 package com.maria.controle_gastos_backend.resources;
 
+import com.maria.controle_gastos_backend.DTO.UsuarioDTO;
 import com.maria.controle_gastos_backend.entities.Usuario;
 import com.maria.controle_gastos_backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,17 @@ public class UsuarioResource {
     private UsuarioService service;
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> findAll(){
-        List<Usuario> list =service.findAll();
-        return ResponseEntity.ok().body(list);
-    }
+    public ResponseEntity<List<UsuarioDTO>> findAll() {
+        List<Usuario> list = service.findAll();
+        //return ResponseEntity.ok().body(list);
 
+        List<UsuarioDTO> dto = list.stream().map(UsuarioDTO::new).toList();
+        return ResponseEntity.ok().body(dto);
+    }
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Usuario> findById(@PathVariable Long id){
-        Usuario categoria = service.findById(id);
-        return ResponseEntity.ok().body(categoria);
+    public ResponseEntity<UsuarioDTO> findById(@PathVariable Long id){
+        Usuario usuario = service.findById(id);
+        return ResponseEntity.ok().body(new UsuarioDTO(usuario));
     }
 
     @PostMapping
