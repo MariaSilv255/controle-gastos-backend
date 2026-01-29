@@ -1,5 +1,6 @@
 package com.maria.controle_gastos_backend.resources;
 
+import com.maria.controle_gastos_backend.DTO.DespesaDTO;
 import com.maria.controle_gastos_backend.entities.Despesa;
 import com.maria.controle_gastos_backend.services.DespesaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +18,17 @@ public class DespesaResource {
     private DespesaService service;
 
     @GetMapping
-    public ResponseEntity <List<Despesa>> findAll(){
+    public ResponseEntity <List<DespesaDTO>> findAll(){
         List<Despesa> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+        List<DespesaDTO> dto = list.stream().map(DespesaDTO::new).toList();
+
+        return ResponseEntity.ok().body(dto);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity <Despesa> findById(@PathVariable Long id){
+    public ResponseEntity <DespesaDTO> findById(@PathVariable Long id){
         Despesa despesa = service.findById(id);
-        return ResponseEntity.ok().body(despesa);
+        return ResponseEntity.ok().body(new DespesaDTO(despesa));
     }
 
     @PostMapping
