@@ -21,15 +21,22 @@ public class WhatsAppService {
     @Autowired
     private DespesaService despesaService;
 
-    public void processarMensagem(String mensagem, String telefone){
+    public void processarMensagem(String mensagem, String telefone) {
 
+        // Exemplo recebido: "50 alimentacao"
         String[] msg = mensagem.split(" ");
 
-        if(msg.length < 2){
-            throw new IllegalArgumentException("formato invalido. User: 55 alimentação");
+        if (msg.length < 2) {
+            throw new IllegalArgumentException(
+                    "❌ Formato inválido.\nUse:\n50 alimentacao"
+            );
         }
 
-        Usuario usuario = usuarioService.findByTelefone(telefone);
+        // Remove whatsapp:+
+        String numeroLimpo = telefone.replace("whatsapp:+", "");
+
+        Usuario usuario = usuarioService.findByTelefone(numeroLimpo);
+
         BigDecimal valor = new BigDecimal(msg[0]);
         Categoria categoria = categoriaService.findByCategoria(msg[1]);
 
@@ -38,10 +45,11 @@ public class WhatsAppService {
         despesa.setData(LocalDate.now());
         despesa.setValor(valor);
         despesa.setUsuario(usuario);
-        despesa.setDescricao("via whatsapp");
+        despesa.setDescricao("Registrada via WhatsApp");
 
         despesaService.save(despesa);
 
+        System.out.println("✅ Despesa registrada no banco!");
     }
 
 }

@@ -1,24 +1,44 @@
 package com.maria.controle_gastos_backend.resources;
 
 import com.maria.controle_gastos_backend.DTO.WhatsAppMessageDTO;
+import com.maria.controle_gastos_backend.services.TwilioWhatsAppService;
 import com.maria.controle_gastos_backend.services.WhatsAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/webhook")
 public class WhatsAppWebhookResource {
 
     @Autowired
-    private WhatsAppService service;
+    private WhatsAppService whatsAppService;
+
+    @Autowired
+    private TwilioWhatsAppService twilioService;
+
+    @GetMapping("/ping")
+    public String ping() {
+        System.out.println("🔥 Webhook ping chegou!");
+        return "OK";
+    }
 
     @PostMapping("/whatsapp")
-    public ResponseEntity<String> getMessage (@RequestBody WhatsAppMessageDTO dto){
-        service.processarMensagem(dto.getMensagem() ,dto.getTelefone());
-        return  ResponseEntity.ok("Despesa registrada com sucesso");
+    public ResponseEntity<Void> receberMensagem(
+            @RequestParam("From") String from,
+            @RequestParam("Body") String body
+    ) {
+
+        // ✅ CORRETO: body = mensagem, from = telefone
+        whatsAppService.processarMensagem(body, from);
+
+        // Resposta automática
+        twilioService.enviarMensagem(
+                from,
+                "✅ Despesa registrada com sucesso: " + body
+        );
+
+        return ResponseEntity.ok().build();
     }
+
 }
