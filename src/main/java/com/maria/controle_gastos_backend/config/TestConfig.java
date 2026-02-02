@@ -32,10 +32,13 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        Categoria categoriaa = new Categoria(null,"Alimentação");
-        Categoria categoriab = new Categoria(null,"Moradia");
+        Categoria categoriaa = new Categoria(null,"ALIMENTACAO");
+        Categoria categoriab = new Categoria(null,"MORADIA");
+        Categoria categoriaC = new Categoria(null,"LAZER");
+        Categoria categoriaD = new Categoria(null,"LUZ");
+        Categoria categoriaE = new Categoria(null,"AGUA");
 
-        categoriaRepository.saveAll(Arrays.asList(categoriaa,categoriab));
+        categoriaRepository.saveAll(Arrays.asList(categoriaa,categoriab,categoriaC,categoriaD,categoriaE));
 
         Usuario user2 = new Usuario(null,"maria aparecida","558487518025","123456","maria@gmail");
         Usuario user1 = new Usuario(null,"Marcos Rangel","558496863409","123456","maria@gmail");

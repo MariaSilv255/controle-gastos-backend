@@ -29,10 +29,10 @@ public class WhatsAppWebhookResource {
             @RequestParam("Body") String body
     ) {
 
-        // ✅ CORRETO: body = mensagem, from = telefone
+
         whatsAppService.processarMensagem(body, from);
 
-        // Resposta automática
+
         twilioService.enviarMensagem(
                 from,
                 "✅ Despesa registrada com sucesso: " + body

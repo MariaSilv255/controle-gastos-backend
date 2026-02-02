@@ -38,7 +38,7 @@ public class WhatsAppService {
         Usuario usuario = usuarioService.findByTelefone(numeroLimpo);
 
         BigDecimal valor = new BigDecimal(msg[0]);
-        Categoria categoria = categoriaService.findByCategoria(msg[1]);
+        Categoria categoria = categoriaService.findByCategoria(msg[1].toUpperCase());
 
         Despesa despesa = new Despesa();
         despesa.setCategoria(categoria);
